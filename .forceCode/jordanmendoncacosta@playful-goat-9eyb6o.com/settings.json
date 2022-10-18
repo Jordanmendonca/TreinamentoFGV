@@ -1,4 +1,4 @@
-git{
+{
     "alias": "",
     "apiVersion": "54.0",
     "deployOptions": {
@@ -20,5 +20,8 @@ git{
     "spaDist": "",
     "src": "src",
     "staticResourceCacheControl": "Private",
-    "username": "jordanmendoncacosta@playful-goat-9eyb6o.com"
+    "username": "jordanmendoncacosta@playful-goat-9eyb6o.com",
+    "url": "https://login.salesforce.com",
+    "autoCompile": false,
+    "useSourceFormat": false
 }
