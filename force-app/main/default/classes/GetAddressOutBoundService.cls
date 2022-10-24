@@ -24,29 +24,6 @@ public class GetAddressOutBoundService {
         System.debug( JSON.serialize(zipAddress.complemento) );
 
         return zipAddress.toAccount();
-    }
-
-    public class ViaCepZipAddress {
-        public string cep;
-        public string logradouro;
-        public string complemento;
-        public string bairro;
-        public string localidade;
-        public string ibge;
-        public string uf;
-        public string gia;
-        public string ddd;
-        public string siafi;      
-        
-        public Account toAccount (){
-            Account account = new Account();
-            account.BillingStreet = logradouro + ' ' + complemento;
-            account.BillingPostalCode = cep;
-            account.BillingCity = localidade;
-            account.BillingState = uf;
-            return account;
-        }
-        
-    }
+    }    
 
 }
