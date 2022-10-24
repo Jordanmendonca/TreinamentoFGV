@@ -48,7 +48,7 @@
         init(event);
     }
 
-    public EventQueue(EventTypetype){
+    public EventQueue(EventType type) {
         this();
         init(new Queue__c(eventName__c = type.name()));
     }
@@ -93,6 +93,10 @@
 
     public String getEventName(){
         return this.event.eventName__c;
+    }
+
+    public String getBusinessDocumentNumber(){
+        return this.event.businessDocument__c;
     }
 
     public String getStatus(){

@@ -1,32 +1,34 @@
-public  class GetAddressOutboundCommand extends AbstractUpdateableOutboundCommand{
+/**
+ * @author Jordan Costa - BRQ
+ */
+public class GetAddressOutboundCommand extends AbstractUpdateableOutboundCommand{    
 
-    ViaCepZipAdress zipAddress;
+    ViaCepZipAddress zipAddress;
     AccountRepository repository;
 
+    public GetAddressOutboundCommand(){
+        this.repository = new AccountRepository();
+    }
+
+
     override
-    public abstract Object transformToSend (){        
-        return event.get().businessDocument__c;
+    public Object transformToSend () {  
+        return event.getBusinessDocumentNumber();      
+    }
+  
+    override
+    public Object send () {
+        return proxy.get(targetObject + '/json');
     }
 
     override
-    public Object send(){
-        return proxy.get(targetObject + '/json');
-    }  
-
-    override
-    public abstract void processResult (Object responseObject){
-        zipAddress = (ViaCepZipAdress) JSON.deserialize( (String) responseObject, ViaCepZipAdress.class)
+    public void processResult (Object responseObject) {
+       zipAddress = (ViaCepZipAddress) JSON.deserialize( (String) responseObject, ViaCepZipAddress.class);
     }
    
     override
-    public void postUpdateExecute() {
-
-        repository.save(zipAddress.toAccount(event.getObjectId()));
-
-    }
-
-    public BaseRestProxy getHttpRequestProxy(EventQueue event) {
-        return new RestProxy(event);
-    }
+    public void postUpdateExecute() {   //Execução de DML   
+        repository.create(zipAddress.toAccount(event.getObjectId()));
+    }  
 
 }
